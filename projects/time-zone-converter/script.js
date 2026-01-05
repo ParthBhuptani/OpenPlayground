@@ -24,4 +24,5 @@ function convertTime() {
     const formattedMinutes = minutes.toString().padStart(2, '0');
 
     document.getElementById('result').innerText = `Converted Time: ${formattedHours}:${formattedMinutes}`;
+
 }
