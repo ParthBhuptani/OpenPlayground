@@ -2322,3 +2322,142 @@ html[data-theme="dark"] .team-role {
         background-position: -200% 0;
     }
 }
+
+/* Component Skeleton Loading */
+.skeleton-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-light);
+    backdrop-filter: blur(10px);
+}
+
+.skeleton-navbar .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 4rem;
+}
+
+.skeleton-navbar .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skeleton-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.skeleton-text {
+    height: 1.5rem;
+    width: 8rem;
+}
+
+.skeleton-title {
+    height: 1.5rem;
+    width: 10rem;
+}
+
+.skeleton-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.skeleton-nav-link {
+    height: 1.2rem;
+    width: 4rem;
+}
+
+.skeleton-theme {
+    height: 2rem;
+    width: 4rem;
+    border-radius: 2rem;
+}
+
+.skeleton-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-hero .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+    z-index: 2;
+}
+
+.skeleton-hero .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+}
+
+.skeleton-hero .hero-title {
+    margin-bottom: 1.5rem;
+}
+
+.skeleton-title-large {
+    height: 4rem;
+    width: 20rem;
+    margin: 0 auto;
+}
+
+.skeleton-hero .hero-subtitle {
+    margin-bottom: 2rem;
+}
+
+.skeleton-description {
+    height: 1.5rem;
+    width: 30rem;
+    margin: 0 auto;
+}
+
+.skeleton-hero .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.skeleton-btn {
+    height: 3rem;
+    width: 8rem;
+    border-radius: 0.5rem;
+}
+
+.skeleton-hero .hero-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.skeleton-stat {
+    text-align: center;
+}
+
+.skeleton-stat .skeleton-number {
+    height: 2rem;
+    width: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.skeleton-stat .skeleton-label {
+    height: 1rem;
+    width: 5rem;
+}
