@@ -47,7 +47,7 @@ A responsive web app to search GitHub profiles in real time using the GitHub RES
 └── README.md
 ```
 
-
+---
 
 ## 📖 Usage
 
