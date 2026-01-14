@@ -8,7 +8,7 @@
 [![Contributors](https://img.shields.io/github/contributors/YadavAkhileshh/OpenPlayground)](https://github.com/YadavAkhileshh/OpenPlayground/graphs/contributors)
 [![Stars](https://img.shields.io/github/stars/YadavAkhileshh/OpenPlayground?style=social)](https://github.com/YadavAkhileshh/OpenPlayground/stargazers)
 
-**🌐 [View Live Website](https://open-playground-seven.vercel.app/) | 📖 [Contributing Guide](CONTRIBUTING.md) | 💬 [Discussions](https://github.com/YadavAkhileshh/OpenPlayground/discussions)**
+**🌐 [View Live Website](https://open-playground-seven.vercel.app/) | 📖 [Contributing Guide](CONTRIBUTING.md) | 🐛 [Debugging Guide](DEBUGGING_GUIDE.md) | 💬 [Discussions](https://github.com/YadavAkhileshh/OpenPlayground/discussions)**
 
 • Project spotlight: Recipe – [Landing Page Preview](./projects/Recipe/landing.html)
 
@@ -160,6 +160,8 @@ OpenPlayground/
 - Include error handling where appropriate
 
 **📖 [Read the full contributing guide →](CONTRIBUTING.md)**
+
+**🐛 Running into issues? [Check the debugging guide →](DEBUGGING_GUIDE.md)**
 
 ---
 
