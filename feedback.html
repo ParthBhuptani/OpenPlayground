@@ -9,6 +9,8 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script type="module" src="./js/core/notificationManager.js"></script>
+    <script type="module" src="./js/core/validationEngine.js"></script>
     <style>
         /* ===============================
            Theme System - Orange Theme
@@ -1163,39 +1165,7 @@
             font-weight: 500;
         }
 
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            padding: 1rem 1.5rem;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-xl);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            border-left: 4px solid var(--primary-500);
-            max-width: 400px;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .toast.success {
-            border-left-color: var(--success-500);
-        }
-
-        .toast.error {
-            border-left-color: var(--danger-500);
-        }
+        /* Local Toast styles removed in favor of centralized NotificationManager */
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -1392,7 +1362,8 @@
         <div class="hero-content">
             <div class="hero-badge">
                 <i class="fas fa-globe-americas"></i>
-                <a href="https://github.com/YadavAkhileshh/OpenPlayground/graphs/contributors" target="_blank" style="color: ivory; text-decoration: none;">Global Community</a>
+                <a href="https://github.com/YadavAkhileshh/OpenPlayground/graphs/contributors" target="_blank"
+                    style="color: ivory; text-decoration: none;">Global Community</a>
             </div>
             <h1 class="hero-title">
                 Your Voice Echoes
@@ -1681,8 +1652,7 @@
         </div>
     </footer>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
+    <!-- Centralized Notification System will inject container here -->
 
     <script>
         // ===============================
@@ -2346,19 +2316,22 @@
             const rating = parseInt(ratingInput.value);
             const message = messageInput.value.trim();
 
-            // Validation
-            if (!category) {
-                showToast('Please select a category', 'error');
+            // Validation using ValidationEngine
+            const rules = {
+                category: { required: true },
+                message: { required: true, min: 5, max: CONFIG.MAX_CHARACTERS }
+            };
+
+            const validation = window.ValidationEngine.validate({ category, message }, rules);
+
+            if (!validation.isValid) {
+                const errorMsg = Object.values(validation.errors)[0];
+                window.notificationManager.error(errorMsg);
                 return;
             }
 
             if (rating === 0 || isNaN(rating)) {
-                showToast('Please select a rating', 'error');
-                return;
-            }
-
-            if (!message) {
-                showToast('Please enter your message', 'error');
+                window.notificationManager.warning('Please select a rating');
                 return;
             }
 
@@ -2409,9 +2382,9 @@
 
                 // Show success message
                 if (serverResult.success) {
-                    showToast('✅ Posted globally! Visible everywhere! 🌍', 'success');
+                    window.notificationManager.success('Posted globally! Visible everywhere! 🌍');
                 } else {
-                    showToast('📱 Posted locally. Will sync when online.', 'info');
+                    window.notificationManager.info('Posted locally. Will sync when online.');
                 }
 
                 // Scroll to feed
@@ -2421,7 +2394,7 @@
 
             } catch (error) {
                 console.error('❌ Error sharing feedback:', error);
-                showToast('Error sharing feedback', 'error');
+                window.notificationManager.error('Error sharing feedback');
             } finally {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
@@ -2434,8 +2407,8 @@
             let name = document.getElementById('footerName').value.trim() || 'Anonymous';
             const message = document.getElementById('footerMessage').value.trim();
 
-            if (!message) {
-                showToast('Please enter your feedback', 'error');
+            if (!window.ValidationEngine.isRequired(message)) {
+                window.notificationManager.error('Please enter your feedback');
                 return;
             }
 
@@ -2477,7 +2450,7 @@
             renderTrending();
             updateGlobalStats();
 
-            showToast('Thank you for your feedback!', 'success');
+            window.notificationManager.success('Thank you for your feedback!');
         }
 
         function clearForm() {
@@ -2794,23 +2767,7 @@
             state.isLoading = show;
         }
 
-        function showToast(message, type = 'info') {
-            if (!toast) return;
-
-            toast.textContent = message;
-            toast.className = `toast ${type}`;
-
-            let icon = 'fas fa-info-circle';
-            if (type === 'success') icon = 'fas fa-check-circle';
-            if (type === 'error') icon = 'fas fa-exclamation-circle';
-
-            toast.innerHTML = `<i class="${icon}"></i> <span>${message}</span>`;
-            toast.classList.add('show');
-
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
+        // Toast notifications are now handled by NotificationManager
 
         // ===============================
         // Navbar Active Link Management

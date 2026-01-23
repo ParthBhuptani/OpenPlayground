@@ -4,6 +4,7 @@
 
 import { ProjectVisibilityEngine } from "./core/projectVisibilityEngine.js";
 import { keyevents } from "./core/Shortcut.js"
+import notificationManager from "./core/notificationManager.js";
 
 class ProjectManager {
     constructor() {
@@ -453,24 +454,10 @@ window.toggleProjectBookmark = function (btn, title, link, category, description
     btn.classList.toggle('bookmarked', isNowBookmarked);
     if (icon) icon.className = isNowBookmarked ? 'ri-bookmark-fill' : 'ri-bookmark-line';
 
-    showToast(isNowBookmarked ? 'Added to bookmarks' : 'Removed from bookmarks');
+    notificationManager.success(isNowBookmarked ? 'Added to bookmarks' : 'Removed from bookmarks');
 };
 
-function showToast(message) {
-    const existing = document.querySelector('.bookmark-toast');
-    if (existing) existing.remove();
-
-    const toast = document.createElement('div');
-    toast.className = 'bookmark-toast';
-    toast.innerHTML = `<i class="ri-bookmark-fill"></i><span>${message}</span>`;
-    document.body.appendChild(toast);
-
-    setTimeout(() => toast.classList.add('show'), 10);
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, 2000);
-}
+// Toast notifications are now handled by NotificationManager
 
 // ===============================
 // Global Initialization

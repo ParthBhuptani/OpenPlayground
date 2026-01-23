@@ -115,11 +115,11 @@ document.addEventListener('bookmarksCleared', updateBookmarkBadge);
 // Add bookmark buttons to existing static cards
 function addBookmarkButtonsToCards() {
     const cards = document.querySelectorAll('.projects-container .card, .projects-section .card');
-    
+
     cards.forEach(card => {
         // Skip if already has bookmark button
         if (card.querySelector('.bookmark-btn')) return;
-        
+
         // Get project info from card
         const titleEl = card.querySelector('.card-heading');
         const descEl = card.querySelector('.card-description');
@@ -127,18 +127,18 @@ function addBookmarkButtonsToCards() {
         const coverEl = card.querySelector('.card-cover');
         const techEls = card.querySelectorAll('.card-tech span');
         const iconEl = coverEl ? coverEl.querySelector('i') : null;
-        
+
         if (!titleEl) return;
-        
+
         const projectTitle = titleEl.textContent.trim();
         const isBookmarked = window.bookmarksManager.isBookmarked(projectTitle);
-        
+
         // Create bookmark button
         const btn = document.createElement('button');
         btn.className = `bookmark-btn ${isBookmarked ? 'bookmarked' : ''}`;
         btn.setAttribute('aria-label', isBookmarked ? 'Remove bookmark' : 'Add bookmark');
         btn.innerHTML = `<i class="${isBookmarked ? 'ri-bookmark-fill' : 'ri-bookmark-line'}"></i>`;
-        
+
         // Build project object for storage
         const project = {
             title: projectTitle,
@@ -149,49 +149,36 @@ function addBookmarkButtonsToCards() {
             coverStyle: coverEl ? coverEl.getAttribute('style') || '' : '',
             tech: Array.from(techEls).map(el => el.textContent.trim())
         };
-        
+
         // Click handler
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            
+
             const isNowBookmarked = window.bookmarksManager.toggleBookmark(project);
             const icon = btn.querySelector('i');
-            
+
             btn.classList.toggle('bookmarked', isNowBookmarked);
             icon.className = isNowBookmarked ? 'ri-bookmark-fill' : 'ri-bookmark-line';
             btn.setAttribute('aria-label', isNowBookmarked ? 'Remove bookmark' : 'Add bookmark');
-            
+
             // Animation
             btn.classList.add('animate');
             setTimeout(() => btn.classList.remove('animate'), 300);
-            
+
             // Toast
-            showBookmarkToast(isNowBookmarked ? 'Added to bookmarks' : 'Removed from bookmarks');
+            if (window.notificationManager) {
+                window.notificationManager.success(isNowBookmarked ? 'Added to bookmarks' : 'Removed from bookmarks');
+            }
         });
-        
+
         // Ensure card has relative positioning
         card.style.position = 'relative';
         card.insertBefore(btn, card.firstChild);
     });
 }
 
-// Show toast notification
-function showBookmarkToast(message) {
-    const existingToast = document.querySelector('.bookmark-toast');
-    if (existingToast) existingToast.remove();
-    
-    const toast = document.createElement('div');
-    toast.className = 'bookmark-toast';
-    toast.innerHTML = `<i class="ri-bookmark-fill"></i><span>${message}</span>`;
-    document.body.appendChild(toast);
-    
-    setTimeout(() => toast.classList.add('show'), 10);
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, 2000);
-}
+// Toast notifications are now handled by NotificationManager
 
 // Initialize bookmark buttons when components load
 document.addEventListener('DOMContentLoaded', () => {
