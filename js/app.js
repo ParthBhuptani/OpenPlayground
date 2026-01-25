@@ -451,26 +451,23 @@ class ProjectManager {
     renderCardView(container, projects) {
         container.innerHTML = projects.map((project) => {
             const isBookmarked = window.bookmarksManager?.isBookmarked(project.title);
+            const isCompareSelected = window.comparisonEngine?.isSelected(project) || false;
             const techHtml = project.tech?.map(t => `<span>${this.escapeHtml(t)}</span>`).join('') || '';
             const coverStyle = project.coverStyle || '';
             const coverClass = project.coverClass || '';
             const sourceUrl = this.getSourceCodeUrl(project.link);
-            const projectId = project.folder || project.name || project.title;
-            const badgeHtml = this.getProjectBadgeHtml(project);
+            const projectJson = JSON.stringify(project).replace(/'/g, "\\'");
 
             return `
-                <div class="card" 
-                     data-category="${this.escapeHtml(project.category)}" 
-                     data-project-id="${this.escapeHtml(projectId)}"
-                     onclick="window.projectManagerInstance.handleProjectClick(event, ${JSON.stringify(project).replace(/"/g, '&quot;')})">
-                    ${badgeHtml}
+                <div class="card ${isCompareSelected ? 'compare-selected' : ''}" data-category="${this.escapeHtml(project.category)}" onclick="window.location.href='${this.escapeHtml(project.link)}'; event.stopPropagation();">
                     <div class="card-actions">
-                        <button class="collection-btn ${isBookmarked ? 'visible' : ''}"
-                                data-project-title="${this.escapeHtml(project.title)}"
-                                onclick="event.preventDefault(); event.stopPropagation(); window.showCollectionDropdown(this, '${this.escapeHtml(project.title)}', '${this.escapeHtml(project.link)}', '${this.escapeHtml(project.category)}', '${this.escapeHtml(project.description || '')}');"
-                                title="Add to Collection">
-                            <i class="ri-folder-add-line"></i>
-                        </button>
+                        <label class="compare-checkbox-wrapper" title="Add to comparison" onclick="event.stopPropagation();">
+                            <input type="checkbox" class="compare-checkbox" 
+                                   data-project-title="${this.escapeHtml(project.title)}"
+                                   ${isCompareSelected ? 'checked' : ''}
+                                   onchange="window.handleCompareToggle(this, '${projectJson}')">
+                            <span class="compare-checkmark"><i class="ri-git-compare-line"></i></span>
+                        </label>
                         <button class="bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" 
                                 data-project-title="${this.escapeHtml(project.title)}" 
                                 onclick="event.preventDefault(); event.stopPropagation(); window.toggleProjectBookmark(this, '${this.escapeHtml(project.title)}', '${this.escapeHtml(project.link)}', '${this.escapeHtml(project.category)}', '${this.escapeHtml(project.description || '')}');"
@@ -522,13 +519,20 @@ class ProjectManager {
     renderListView(container, projects) {
         container.innerHTML = projects.map(project => {
             const isBookmarked = window.bookmarksManager?.isBookmarked(project.title);
+            const isCompareSelected = window.comparisonEngine?.isSelected(project) || false;
             const coverStyle = project.coverStyle || '';
             const coverClass = project.coverClass || '';
-            const projectId = project.folder || project.name || project.title;
-            const badgeHtml = this.getProjectBadgeHtml(project);
+            const projectJson = JSON.stringify(project).replace(/'/g, "\\'");
 
             return `
-                <div class="list-card" data-project-id="${this.escapeHtml(projectId)}">
+                <div class="list-card ${isCompareSelected ? 'compare-selected' : ''}">
+                    <label class="compare-checkbox-wrapper list-compare" title="Add to comparison">
+                        <input type="checkbox" class="compare-checkbox" 
+                               data-project-title="${this.escapeHtml(project.title)}"
+                               ${isCompareSelected ? 'checked' : ''}
+                               onchange="window.handleCompareToggle(this, '${projectJson}')">
+                        <span class="compare-checkmark"><i class="ri-git-compare-line"></i></span>
+                    </label>
                     <div class="list-card-icon ${coverClass}" style="${coverStyle}">
                         <i class="${this.escapeHtml(project.icon || 'ri-code-s-slash-line')}"></i>
                     </div>
@@ -912,6 +916,44 @@ window.openSandboxPreview = function(btn) {
         console.error('Failed to open sandbox preview:', e);
     }
 };
+
+/**
+ * Global Compare Toggle Handler
+ * Feature #1333: Project Comparison
+ */
+window.handleCompareToggle = function(checkbox, projectJson) {
+    if (!window.comparisonEngine) {
+        console.warn('Comparison engine not loaded');
+        return;
+    }
+    
+    try {
+        const project = JSON.parse(projectJson);
+        const isSelected = window.comparisonEngine.toggleSelection(project);
+        
+        // Update card visual state
+        const card = checkbox.closest('.card, .list-card');
+        if (card) {
+            card.classList.toggle('compare-selected', isSelected);
+        }
+    } catch (e) {
+        console.error('Failed to toggle comparison:', e);
+    }
+};
+
+// Listen for comparison updates to re-render if needed
+document.addEventListener('comparisonUpdated', (e) => {
+    // Update all compare checkboxes
+    document.querySelectorAll('.compare-checkbox').forEach(checkbox => {
+        const title = checkbox.dataset.projectTitle;
+        const isSelected = e.detail.projects.some(p => p.title === title);
+        checkbox.checked = isSelected;
+        const card = checkbox.closest('.card, .list-card');
+        if (card) {
+            card.classList.toggle('compare-selected', isSelected);
+        }
+    });
+});
 
 // ===============================
 // Global Initialization
