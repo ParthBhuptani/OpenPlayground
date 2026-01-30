@@ -1755,5 +1755,11 @@
       "path": "./projects/Resumator/project.json",
       "link": "./projects/Resumator/index.html"
     }
+     {
+      "folder": "Sharks",
+      "path": "./projects/Sharks/project.json",
+      "link": "./projects/Sharks/index.html"
+    }
+  
   ]
 }
