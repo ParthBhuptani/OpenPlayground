@@ -1734,11 +1734,16 @@
       "folder": "Digital Mood Landscape",
       "path": "./projects/Digital Mood Landscape/project.json",
       "link": "./projects/Digital Mood Landscape/index.html"
-    }
+    },
     {
       "folder": "puzzleroom",
       "path": "./projects/puzzleroom/project.json",
       "link": "./projects/puzzleroom/index.html"
+    },
+    {
+      "folder": "Study-Buddy",
+      "path": "./projects/Studdy-Buddy/project.json",
+      "link": "./projects/Studdy-Buddy/index.html"
     }
   ]
 }
