@@ -23,6 +23,12 @@
       "path": "./projects/AttentionGarden/project.json",
       "link": "./projects/AttentionGarden/index.html"
     },
+     {
+      "folder": "e-learn",
+      "path": "./projects/e-learn/project.json",
+      "link": "./projects/e-learn/index.html"
+    },
+  
     {
       "folder": "MinimalSurvival",
       "path": "./projects/MinimalSurvival/project.json",
@@ -537,6 +543,11 @@
       "folder": "draw-perfect-circle",
       "path": "./projects/draw-perfect-circle/project.json",
       "link": "./projects/draw-perfect-circle/index.html"
+    },
+    {
+      "folder": "drawing-canvas",
+      "path": "./projects/drawing-canvas/project.json",
+      "link": "./projects/drawing-canvas/index.html"
     },
     {
       "folder": "Drum-Kit-Activity",
@@ -1869,6 +1880,11 @@
       "link": "./projects/virtual-keyboard/index.html"
     },
     {
+      "folder": "taskify-todo-app",
+      "path": "./projects/taskify-todo-app/project.json",
+      "link": "./projects/taskify-todo-app/index.html"
+    },
+    {
       "folder": "Virtual_Control_Panel",
       "path": "./projects/Virtual_Control_Panel/project.json",
       "link": "./projects/Virtual_Control_Panel/index.html"
@@ -1932,6 +1948,31 @@
       "folder": "HUMANBODYMAP",
       "path": "./projects/HUMANBODYMAP/project.json",
       "link": "./projects/HUMANBODYMAP/index.html"
+    },
+    {
+      "folder": "HISTORY",
+      "path": "./projects/HISTORY/project.json",
+      "link": "./projects/HISTORY/index.html"
+    },
+    {
+      "folder": "humanemotions",
+      "path": "./projects/humanemotions/project.json",
+      "link": "./projects/humanemotions/index.html"
+    },
+    {
+      "folder": "Memory-of-Emotions",
+      "path": "./projects/Memory-of-Emotions/project.json",
+      "link": "./projects/Memory-of-Emotions/index.html"
+    },    
+    {
+      "folder": "brainDump",
+      "path": "./projects/brainDump/project.json",
+      "link": "./projects/brainDump/index.html"
+    },
+    {
+      "folder": "LifeTimePlanner",
+      "path": "./projects/LifeTimePlanner/project.json",
+      "link": "./projects/LifeTimePlanner/index.html"
     },
     {
       "folder": "SEOMETA",
@@ -2037,6 +2078,11 @@
       "link":"./projects/Matching-Cards/index.html"
     },
     {
+      "folder":"Studenthousefinder",
+      "path":"./projects/Studenthousefinder/project.json",
+      "link":"./projects/Studenthousefinder/index.html"
+    },
+    {
       "folder":"Productivity Dashboard",
       "path":"./projects/Productivity Dashboard/project.json",
       "link":"./projects/Productivity Dashboard/index.html"
@@ -2051,6 +2097,22 @@
       "path":"./projects/one pager/project.json",
       "link":"./projects/one pager/index.html"
     },
+    {
+      "folder":"Weather-app",
+      "path":"./projects/Weather-app/project.json",
+      "link":"./projects/Weather-app/index.html"
+    },
+    {
+      "folder": "expensetracker",
+      "path": "./projects/expensetracker/project.json",
+      "link": "./projects/expensetracker/index.html"
+    },
+    {
+      "folder": "Schoolwebsite",
+      "path": "./projects/Schoolwebsite/project.json",
+      "link": "./projects/Schoolwebsite/index.html"
+    }
+    ,
     {
       "folder": "Calci",
       "path": "./projects/Calci/project.json",
@@ -2067,6 +2129,69 @@
       "link": "./projects/SpeedType/index.html"
     }
   
+    },
+      {
+      "folder": "internet-speed-status-checker",
+      "path": "./projects/internet-speed-status-checker/project.json",
+      "link": "./projects/internet-speed-status-checker/index.html"
+      },
+    {
+      "folder":"internet-speed-tester",
+      "path":"./projects/internet-speed-tester/project.json",
+      "link":"./projects/internet-speed-tester/index.html"
+    },
+    {
+      "folder": "certificate-generator",
+      "path": "./projects/certificate-generator/project.json",
+      "link": "./projects/certificate-generator/index.html"
+    },
+    {
+      "folder": "time-complexity-game",
+      "path": "./projects/time-complexity-game/project.json",
+      "link": "./projects/time-complexity-game/index.html"
+
+    },
+
+   {
+      "folder": "time-date-habit-detector",
+      "path": "./projects/time-date-habit-detector/project.json",
+      "link": "./projects/time-date-habit-detector/index.html"
+    },
+    {
+      "folder": "ValForm",
+      "path": "./projects/ValForm/project.json",
+      "link": "./projects/ValForm/index.html"
+    },
+    {
+      "folder": "battery-status-viewer",
+      "path": "./projects/battery-status-viewer/project.json",
+      "link": "./projects/battery-status-viewer/index.html"
+    },
+    {
+      "folder": "FocusYou",
+      "path": "./projects/FocusYou/project.json",
+      "link": "./projects/FocusYou/index.html"
+    },
+    {
+      "folder": "puzzleroom",
+      "path": "./projects/puzzleroom/project.json",
+      "link": "./projects/puzzleroom/index.html"
+    },
+     {
+      "folder": "tab-focus-idle-tracker",
+      "path": "./projects/tab-focus-idle-tracker/project.json",
+      "link": "./projects/tab-focus-idle-tracker/index.html"
+    },
+  {
+      "folder": "smart-idle-reminder",
+      "path": "./projects/smart-idle-reminder/project.json",
+      "link": "./projects/smart-idle-reminder/index.html"
+  },
+  {
+      "folder": "Random-Username-Generator",
+      "path": "./projects/Random-Username-Generator/project.json",
+      "link": "./projects/Random-Username-Generator/index.html"
+  }
   
   ]
 }
