@@ -1734,6 +1734,11 @@
       "folder": "Digital Mood Landscape",
       "path": "./projects/Digital Mood Landscape/project.json",
       "link": "./projects/Digital Mood Landscape/index.html"
+    },
+    {
+      "folder": "RPG-character",
+      "path": "./projects/RPG-character/project.json",
+      "link": "./projects/RPG-character/index.html"
     }
   ]
 }
